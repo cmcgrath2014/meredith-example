@@ -1,0 +1,4 @@
+name = Meredith Web Service Example
+description = Web service example.
+core = 7.x
+
