@@ -5,19 +5,20 @@ $datapoints = array ;
 
 switch ($datapoints) {
     case "multiplication":
-        echo "Add up all the arguments";
+        echo "Multiply all argument values";
         break;
     case "next_fibonacci_number":
-        fibonacci($n);
+        echo "Next fibonacci number";        
+fibonacci($n);
         break;
     case "date_addition":
-        echo "Your favorite color is green!";
+        echo "Add time to the date";
         break;
     case "addition":
-        echo "Your favorite color is green!";
+        echo "Add all argument values";
         break;
     default:
-        echo "Your favorite color is neither red, blue, nor green!";
+        echo "This is an example RESTful webservice module for Drupal 7";
 }
 ?>
 
