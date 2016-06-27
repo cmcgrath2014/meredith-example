@@ -1,3 +1,57 @@
 //This is a module for meredith
 
+<?php
+$datapoints = array ;
+
+switch ($datapoints) {
+    case "multiplication":
+        echo "Add up all the arguments";
+        break;
+    case "next_fibonacci_number":
+        fibonacci($n);
+        break;
+    case "date_addition":
+        echo "Your favorite color is green!";
+        break;
+    case "addition":
+        echo "Your favorite color is green!";
+        break;
+    default:
+        echo "Your favorite color is neither red, blue, nor green!";
+}
+?>
+
+//Function added for fib next 
+function fibonacci($n) {
+
+//0, 1, 1, 2, 3, 5, 8, 13, 21
+
+if($n <0)
+return -1;
+
+if ($n == 0)
+return 0;
+
+if($n == 1 || $n == 2)
+return 1;
+
+$int1 = 1;
+$int2 = 1;
+
+$fib = 0;
+
+//start from n==3
+for($i=1; $i<=$n-2; $i++ )
+{
+$fib = $int1 + $int2;
+//swap the values out:
+$int2 = $int1;
+$int1 = $fib;
+}
+
+return $fib;
+
+}
+
+?>
 
