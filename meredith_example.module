@@ -1,0 +1,144 @@
+<?php
+
+/**
+ * @file
+ * Module file for meredith_example module.
+ */
+ 
+/**
+ * Implements hook_menu().
+ */
+function meredith_example_menu() {
+	
+	$items = array();
+	$items['meredith_example'] = array(
+		'title' => 'Meredith Example: Get Data',
+		'page callback' => 'meredith_example_get_data',
+    'access callback' => TRUE,
+	);
+	
+	return $items;
+}
+
+function meredith_example_get_data() {
+
+	//Get the data from the url as a string
+	$data = file_get_contents("http://devel.selectablemedia.com:3000/firststep");
+
+	//convert string to a array and remove empty array items
+	$arr = explode(" ", $data);
+	$arr = array_filter($arr);
+
+	//Get the operation which seems to always be at the end 
+	$op = end($arr);
+	
+	// Strip HTML Tags
+	$clear = strip_tags($op);
+	// Clean up things like &amp;
+	$clear = html_entity_decode($clear);
+	// Strip out any url-encoded stuff
+	$clear = urldecode($clear);
+	// Replace non-AlNum characters with space
+	$clear = preg_replace('/[^A-Za-z0-9_]/', '', $clear);
+	// Trim the string of leading/trailing space
+	$op = trim($clear);
+	
+	//Determine the type of structure the data is in by looking at first character of first item in $arr
+	$first = $arr[0];
+	
+	$sanitized = array();
+	$sanitized['args'] = array();
+	
+	var_dump($arr);
+	switch ($op) {
+    case "multiplication":
+        echo "Multiply all argument values";
+					if($first[0] == "-") {
+					foreach ($arr as $value) {
+						//look for items that 
+						if(preg_match('/[0-9-]/', $value[0]) == 1 && strlen($value) > 1) {
+							array_push($sanitized['args'], $value);
+							echo "Hooray";
+						}
+					}
+				}
+				else if($first[0] == "{") {
+					
+				}
+				else {
+					
+				}
+				var_dump($sanitized);
+        break;
+    case "next_fibonacci_number":
+        echo "Next fibonacci number";        
+        break;
+    case "date_addition":
+        echo "Add time to the date";
+        break;
+    case "addition":
+        echo "Add all argument values";
+        break;
+    default:
+        echo "Not a valid operation";
+	}
+	
+}
+/*
+
+$datapoints = array ;
+
+switch ($datapoints) {
+    case "multiplication":
+        echo "Multiply all argument values";
+        break;
+    case "next_fibonacci_number":
+        echo "Next fibonacci number";        
+fibonacci($n);
+        break;
+    case "date_addition":
+        echo "Add time to the date";
+        break;
+    case "addition":
+        echo "Add all argument values";
+        break;
+    default:
+        echo "This is an example RESTful webservice module for Drupal 7";
+}
+?>
+
+//Function added for fib next 
+function fibonacci($n) {
+
+//0, 1, 1, 2, 3, 5, 8, 13, 21
+
+if($n <0)
+return -1;
+
+if ($n == 0)
+return 0;
+
+if($n == 1 || $n == 2)
+return 1;
+
+$int1 = 1;
+$int2 = 1;
+
+$fib = 0;
+
+//start from n==3
+for($i=1; $i<=$n-2; $i++ )
+{
+$fib = $int1 + $int2;
+//swap the values out:
+$int2 = $int1;
+$int1 = $fib;
+}
+
+return $fib;
+
+}
+
+?>
+
+*/
